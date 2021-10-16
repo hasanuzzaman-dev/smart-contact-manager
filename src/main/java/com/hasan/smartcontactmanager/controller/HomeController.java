@@ -45,6 +45,7 @@ public class HomeController {
     @RequestMapping("/signUp")
     private String signUp(Model model){
         model.addAttribute("title", "SignUp - Smart Contact Manager");
+        model.addAttribute("user", new User());
         return "signUp";
     }
 

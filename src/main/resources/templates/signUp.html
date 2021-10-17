@@ -9,7 +9,70 @@
 </head>
 <body>
 <section>
-    <h1>This is signUp page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card mt-4">
+                    <div class="container text-center">
+                        <img style="width: 80px" src="" th:src="@{/img/signup.png}" alt="">
+                    </div>
+                    <h1 class="text-center">SignUp Here!!</h1>
+                    <form action="" th:action="@{/do_register}" method="post" th:object="${user}">
+                        <!-- name field-->
+                        <div class="mb-3">
+                            <label for="name_field" class="form-label">Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="name_field"
+                                   placeholder="Enter your name"
+                                   required="required"
+                                   th:value="${user.name}"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <!-- Email field-->
+                        <div class="mb-3">
+                            <label for="email_field" class="form-label">Email Address</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="email_field"
+                                   placeholder="Enter your Email"
+                                   required="required"
+                                   th:value="${user.email}"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <!-- Password field-->
+                        <div class="mb-3">
+                            <label for="password_field" class="form-label">Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="password_field"
+                                   placeholder="Enter your password"
+                                   required="required"
+                                   th:value="${user.password}"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <!-- About field-->
+                        <div class="form-floating">
+                            <textarea class="form-control"
+                                      placeholder="Leave a comment here"
+                                      id="floatingTextarea2"
+                                      style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Comments</label>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreement">
+                            <label class="form-check-label" for="agreement">Terms & Condition</label>
+                        </div>
+                        <div class="container text-center">
+                            <button type="submit" class="btn bg-custom-primary text-white">Submit</button>
+                            <button type="reset" class="btn btn-info text-white">Reset</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>

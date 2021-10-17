@@ -1,14 +1,9 @@
 package com.hasan.smartcontactmanager.controller;
 
-import com.hasan.smartcontactmanager.models.Contact;
 import com.hasan.smartcontactmanager.models.User;
-import com.hasan.smartcontactmanager.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -48,6 +43,7 @@ public class HomeController {
         model.addAttribute("user", new User());
         return "signUp";
     }
+
 
 
 }

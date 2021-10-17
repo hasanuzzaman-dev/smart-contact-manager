@@ -34,11 +34,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="about">About</a>
+                    <a class="nav-link" th:classappend="active" aria-current="page" href="about">About</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" th:href="@{/signUp/}">SignUp</a>
+                    <a class="nav-link"th:classappend="active" aria-current="page" th:href="@{/signUp/}">SignUp</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="">LogIn</a>
@@ -50,6 +50,9 @@
         </div>
     </div>
 </nav>
+<!--Navbar End-->
+
+
 
 <div th:replace="${content}"></div>
 

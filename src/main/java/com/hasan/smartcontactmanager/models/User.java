@@ -1,6 +1,8 @@
 package com.hasan.smartcontactmanager.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank(message = "Name field is required !!")
     private String name;
+
     @Column(unique = true)
+    @NotBlank(message = "Email can't be empty!")
+    @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message = "Invalid email !!")
     private String email;
+
+    @NotBlank(message = "Password field is required !!")
     private String password;
     private String role;
     private boolean enabled;

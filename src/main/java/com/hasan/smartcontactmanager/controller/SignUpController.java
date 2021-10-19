@@ -4,6 +4,7 @@ import com.hasan.smartcontactmanager.helper.MyMessage;
 import com.hasan.smartcontactmanager.models.User;
 import com.hasan.smartcontactmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,9 @@ import javax.validation.Valid;
 
 @Controller
 public class SignUpController {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -41,6 +45,7 @@ public class SignUpController {
             user.setRole("ROLE_USER");
             user.setEnabled(true);
             user.setImageUrl("default.png");
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             System.out.println("USER: " + user.toString());
             System.out.println("AGREEMENT: " + agreement);
 

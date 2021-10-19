@@ -47,9 +47,7 @@ public class SignUpController {
             User savedUser = this.userRepository.save(user);
             model.addAttribute("user", savedUser);
 
-            session.setAttribute("message",new MyMessage(
-                    "Successfully Registered!! ",
-                    "alert-success"));
+            session.setAttribute("message",new MyMessage("Successfully Registered!! ", "alert-success"));
 
             return "signUp";
         } catch (Exception e) {
@@ -57,9 +55,7 @@ public class SignUpController {
             model.addAttribute("user", user);
             session.setAttribute(
                     "message",
-                    new MyMessage(
-                            "Something went wrong !! " + e.getMessage(),
-                            "alert-danger")
+                    new MyMessage("Something went wrong !! " + e.getMessage(), "alert-danger")
             );
             return "signUp";
         }

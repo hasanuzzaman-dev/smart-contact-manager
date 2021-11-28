@@ -3,6 +3,7 @@ package com.hasan.smartcontactmanager.controller;
 import com.hasan.smartcontactmanager.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -42,6 +43,13 @@ public class HomeController {
         model.addAttribute("title", "SignUp - Smart Contact Manager");
         model.addAttribute("user", new User());
         return "signUp";
+    }
+
+    // handler for custom login
+    @GetMapping("/signIn")
+    public String customLogin(Model model){
+        model.addAttribute("title","Login - Smart Contact Manager");
+        return "login";
     }
 
 

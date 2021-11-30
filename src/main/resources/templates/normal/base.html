@@ -35,8 +35,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link "
-                       aria-current="page"
-                       th:href="@{/signIn}">
+                       aria-current="page">
                         <span th:text="${user.name}"></span>
                     </a>
                 </li>
@@ -44,8 +43,6 @@
                 <li class="nav-item">
                     <a class="nav-link"th:classappend="active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
-
-
 
             </ul>
 
@@ -55,8 +52,25 @@
 <!--Navbar End-->
 
 
+<!--Sidebar-->
+<div class="sidebar">
+    <a href="#" class="item">Home</a>
+    <a href="#" class="item">View Contacts</a>
+    <a href="#" class="item">Add Contact</a>
+    <a href="#" class="item">Your Profile</a>
+    <a href="#" class="item">Settings</a>
+    <a href="#" class="item">Logout</a>
 
-<div th:replace="${content}"></div>
+    <div class="divider"></div>
+
+</div>
+<!--End Sidebar-->
+
+<!--Start Content-->
+<div class="content">
+    <div th:replace="${content}"></div>
+</div>
+<!--End of content area -->
 
 <!-- Optional JavaScript; choose one of the two! -->
 

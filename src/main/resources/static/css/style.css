@@ -32,3 +32,51 @@ body{
     margin-top: -55px;
 }
 
+@media only screen and (max-width: 600px){
+    .sidebar{
+        display: none;
+        width: 80% !important;
+        background: white;
+        height: 100vh;
+        position: fixed;
+        padding-top: 20px;
+
+    }
+    .content{
+        margin-left: 0 !important;
+
+    }
+
+
+}
+/*Sidebar style*/
+.sidebar{
+    width: 18%;
+    background: white;
+    height: 100%;
+    position: fixed;
+    padding-top: 45px;
+
+}
+.sidebar a{
+    display: block;
+    width: 100%;
+    padding: 10px 25px;
+    color: gray;
+    text-decoration: none;
+}
+.sidebar a:hover{
+    background: darkgray;
+}
+.sidebar .divider{
+    height: 1px;
+    width: 100%;
+    background: darkgray;
+    margin-top: 10px;
+}
+/*Content style*/
+.content{
+    margin-left: 20%;
+
+}
+

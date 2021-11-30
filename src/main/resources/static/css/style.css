@@ -68,6 +68,14 @@ body{
 .sidebar a:hover{
     background: darkgray;
 }
+.sidebar .crossBtn{
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 36px;
+    cursor: pointer;
+
+}
 .sidebar .divider{
     height: 1px;
     width: 100%;

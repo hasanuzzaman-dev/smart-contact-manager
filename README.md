@@ -1,2 +1,4 @@
 # smart-contact-manager
-It's a practice project by following the youtube channel "LearnCodeWith Durgesh". In this project, we are going to build a spring boot project
+we are going to learn important methods to configure the behavior of the custom login page.
+
+<img src= "Methods to configure the behavior of Login Page Spring Security.png" width = "500" height = "500">

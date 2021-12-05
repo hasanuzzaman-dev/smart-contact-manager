@@ -9,7 +9,115 @@
 </head>
 <body>
 <section>
-  <h1>Add Contact</h1>
+
+  <div class="card me-3 ms-3">
+    <div class="card-body">
+      <h1 class="text-center">Add Contact</h1>
+      <div class="container-fluid mt-1">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <form action="#"
+                  th:object="${contact}"
+                  enctype="multipart/form-data"
+                  method="post"
+                  th:action="@{/user/process-contact}"
+                  class="mt-2">
+              <!--First name-->
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                  <i class="fa fa-plus"></i>
+                </span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Enter name here"
+                       name="name"
+                       aria-describedby="basic-addon1">
+              </div>
+              <!--Second name-->
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                  <i class="fas fa-user-alt"></i>
+                </span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Enter lastname here"
+                       name="secondName"
+                       aria-describedby="basic-addon1">
+              </div>
+
+              <!--Work-->
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                 <i class="fas fa-briefcase"></i>
+                </span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Enter work here"
+                       name="work"
+                       id="work"
+                       aria-describedby="basic-addon1">
+              </div>
+
+              <!--Phone-->
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+               <i class="fas fa-mobile-alt"></i>
+                </span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Enter work here"
+                       name="phone"
+                       id="phone"
+                       aria-describedby="basic-addon1">
+              </div>
+
+              <!--Email-->
+              <div class="input-group mb-3">
+                <span class="input-group-text">
+                  <i class="fa fa-envelope"></i>
+                </span>
+                <input type="text"
+                       id="email"
+                       class="form-control"
+                       placeholder="Enter email here"
+                       name="email"
+                       aria-describedby="basic-addon1">
+              </div>
+
+              <!--Description-->
+              <div class="input-group mb-3">
+               <textarea class="form-control"
+                         placeholder="Enter contact description"
+                         name="description"
+                         id="description"
+                         rows="10">
+
+               </textarea>
+
+                <!--Contact Img-->
+                <div class="input-group mt-3 mb-3">
+                  <input type="file"
+                         class="form-control"
+                         id="inputGroupFile04"
+                         aria-describedby="inputGroupFileAddon04"
+                         aria-label="Upload">
+
+                </div>
+
+                <div class="container text-center">
+                  <button class="btn btn-outline-primary">Save Contact</button>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 </body>
 </html>

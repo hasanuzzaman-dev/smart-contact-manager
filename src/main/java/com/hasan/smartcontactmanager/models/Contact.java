@@ -1,5 +1,7 @@
 package com.hasan.smartcontactmanager.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
@@ -94,4 +96,6 @@ public class Contact {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 }

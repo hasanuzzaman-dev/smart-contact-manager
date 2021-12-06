@@ -1,16 +1,20 @@
 package com.hasan.smartcontactmanager.controller;
 
+import com.hasan.smartcontactmanager.helper.MyMessage;
 import com.hasan.smartcontactmanager.models.Contact;
 import com.hasan.smartcontactmanager.models.User;
 import com.hasan.smartcontactmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -45,16 +49,35 @@ public class UserController {
 
     //Processing add contact form
     @PostMapping("/process-contact")
-    public String processContact(@ModelAttribute Contact contact, Principal principal) {
-        String userName = principal.getName();
-        User user = this.userRepository.getUserByUserName(userName);
-        contact.setUser(user);
+    public String processContact(@Valid @ModelAttribute Contact contact,
+                                 BindingResult bindingResult, Model model,
+                                 Principal principal, HttpSession session) {
 
-        user.getContacts().add(contact);
-        this.userRepository.save(user);
-        System.out.println("Data: " + contact);
+        try {
+            if (bindingResult.hasErrors()){
+                model.addAttribute("contact",contact);
+                return "normal/add_contact_form";
+            }
 
-        System.out.println("Added to Database");
+            String userName = principal.getName();
+            User user = this.userRepository.getUserByUserName(userName);
+            contact.setUser(user);
+
+            user.getContacts().add(contact);
+            this.userRepository.save(user);
+            System.out.println("Data: " + contact);
+
+            System.out.println("Added to Database");
+            session.setAttribute("message",new MyMessage("Contact added Successfully!! ", "alert-success"));
+
+            return "normal/add_contact_form";
+        }catch (Exception e){
+            e.printStackTrace();
+            model.addAttribute("contact",contact);
+            session.setAttribute("message", new MyMessage("Something went wrong "+e.getMessage(),"alert-danger"));
+        }
+
         return "normal/add_contact_form";
+
     }
 }

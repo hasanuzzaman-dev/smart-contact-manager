@@ -12,16 +12,18 @@
 
   <div class="card me-3 ms-3">
     <div class="card-body">
+        <div class="alert text-center"
+             th:if="${session.message}"
+             th:classappend="${session.message.type}"
+             role="alert">
+            <p th:text="${session.message.content}"></p>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
       <h1 class="text-center">Add Contact</h1>
       <div class="container-fluid mt-1">
         <div class="row">
           <div class="col-md-8 offset-md-2">
-            <form action="#"
-                  th:object="${contact}"
-                  enctype="multipart/form-data"
-                  method="post"
-                  th:action="@{/user/process-contact}"
-                  class="mt-2">
+            <form action="#" th:object="${contact}" enctype="multipart/form-data" method="post" th:action="@{/user/process-contact}" class="mt-2">
               <!--First name-->
               <div class="input-group mb-3">
                 <span class="input-group-text">
@@ -31,7 +33,13 @@
                        class="form-control"
                        placeholder="Enter name here"
                        name="name"
+                       th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+                       th:value="${contact.name}"
                        aria-describedby="basic-addon1">
+                  <div class="invalid-feedback"
+                       th:each="e:${#fields.errors('name')}"
+                       th:text="${e}">
+                  </div>
               </div>
               <!--Second name-->
 
@@ -43,6 +51,7 @@
                        class="form-control"
                        placeholder="Enter lastname here"
                        name="secondName"
+                       th:value="${contact.secondName}"
                        aria-describedby="basic-addon1">
               </div>
 
@@ -56,6 +65,7 @@
                        placeholder="Enter work here"
                        name="work"
                        id="work"
+                       th:value="${contact.work}"
                        aria-describedby="basic-addon1">
               </div>
 
@@ -69,8 +79,15 @@
                        placeholder="Enter phone number here"
                        name="phone"
                        id="phone"
+                       th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
+                       th:value="${contact.phone}"
                        aria-describedby="basic-addon1">
+                <div class="invalid-feedback"
+                     th:each="e:${#fields.errors('phone')}"
+                     th:text="${e}">
+                </div>
               </div>
+
 
               <!--Email-->
               <div class="input-group mb-3">
@@ -82,7 +99,13 @@
                        class="form-control"
                        placeholder="Enter email here"
                        name="email"
+                       th:classappend="${#fields.hasErrors('email') ? 'is-invalid': ''}"
+                       th:value="${contact.email}"
                        aria-describedby="basic-addon1">
+                <div class="invalid-feedback"
+                     th:each="e:${#fields.errors('email')}"
+                     th:text="${e}">
+                </div>
               </div>
 
               <!--Description-->
@@ -93,9 +116,9 @@
                        placeholder="Enter description here"
                        name="description"
                        rows="10"
+                       th:text="${contact.description}"
                        aria-describedby="basic-addon1"></textarea>
               </div>
-
 
                 <!--Contact Img-->
                 <div class="input-group mt-3 mb-3">
@@ -105,7 +128,6 @@
                          aria-describedby="inputGroupFileAddon04"
                          aria-label="Upload">
                 </div>
-
                 <div class="container text-center">
                   <button class="btn btn-outline-primary">Save Contact</button>
                 </div>

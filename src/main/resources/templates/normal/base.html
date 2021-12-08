@@ -61,6 +61,17 @@
 <div class="sidebar mt-2">
     <span onclick="toggleSidebar()" class="crossBtn">&times;</span>
 
+    <!--Alert Message -->
+    <div class="container">
+        <div class="alert text-center"
+             th:if="${session.message}"
+             th:classappend="${session.message.type}"
+             role="alert">
+            <span th:text="${session.message.content}"></span>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
+    </div>
+
     <a href="#" th:href="@{/user/index}" class="item"><i class="fas fa-home"></i> Home</a>
     <a href="#" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
     <a href="#" th:href="@{/user/add-contact}" class="item"><i class="fas fa-pencil-alt"></i> Add Contact</a>

@@ -66,6 +66,13 @@ public class UserController {
 
             String userName = principal.getName();
             User user = this.userRepository.getUserByUserName(userName);
+
+            // You can use throw exception on alert box
+            /*if (3>2){
+                throw new  Exception();
+                // goto catch block
+            }*/
+
             // processing and uploading file
             if (multipartFile.isEmpty()) {
                 //
@@ -94,12 +101,15 @@ public class UserController {
             this.userRepository.save(user);
             System.out.println("Data: " + contact);
             model.addAttribute("contact", new Contact());
+
+            /*Message Success*/
             session.setAttribute("message", new MyMessage("Contact added Successfully!! ", "alert-success"));
 
             return "normal/add_contact_form";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("contact", contact);
+            /* Message Success */
             session.setAttribute("message", new MyMessage("Something went wrong " + e.getMessage(), "alert-danger"));
         }
 

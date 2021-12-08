@@ -12,13 +12,6 @@
 
   <div class="card me-3 ms-3">
     <div class="card-body">
-        <div class="alert text-center"
-             th:if="${session.message}"
-             th:classappend="${session.message.type}"
-             role="alert">
-            <p th:text="${session.message.content}"></p>
-            <th:block th:text="${#session.removeAttribute('message')}"/>
-        </div>
       <h1 class="text-center">Add Contact</h1>
       <div class="container-fluid mt-1">
         <div class="row">

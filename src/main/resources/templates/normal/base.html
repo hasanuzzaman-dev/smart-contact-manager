@@ -35,7 +35,7 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/user/index}">Home</a>
                 </li>
 
                 <li class="nav-item">
@@ -73,7 +73,7 @@
     </div>
 
     <a href="#" th:href="@{/user/index}" class="item"><i class="fas fa-home"></i> Home</a>
-    <a href="#" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
+    <a href="#" th:href="@{/user/show-contacts}" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
     <a href="#" th:href="@{/user/add-contact}" class="item"><i class="fas fa-pencil-alt"></i> Add Contact</a>
     <a href="#" class="item"><i class="fas fa-user-circle"></i> Your Profile</a>
     <a href="#" class="item"><i class="fas fa-cog"></i> Settings</a>

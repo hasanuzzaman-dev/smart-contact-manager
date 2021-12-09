@@ -75,8 +75,8 @@
                        name="phone"
                        id="phone"
                        required="required"
-                       min="11"
-                       max="11"
+                       minlength="11"
+                       maxlength="11"
                        th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
                        th:value="${contact.phone}"
                        aria-describedby="basic-addon1">

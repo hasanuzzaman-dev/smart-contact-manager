@@ -3,6 +3,7 @@ package com.hasan.smartcontactmanager.controller;
 import com.hasan.smartcontactmanager.helper.MyMessage;
 import com.hasan.smartcontactmanager.models.Contact;
 import com.hasan.smartcontactmanager.models.User;
+import com.hasan.smartcontactmanager.repositories.ContactRepository;
 import com.hasan.smartcontactmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -20,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ContactRepository contactRepository;
 
     // This method run for every method index, add_contact or etc.
     // Method for adding common data for response.
@@ -114,6 +119,23 @@ public class UserController {
         }
 
         return "normal/add_contact_form";
+
+    }
+
+    // Show Contact handler
+    @GetMapping("/show-contacts")
+    public String showContacts(Model model,Principal principal){
+
+        model.addAttribute("title", "Show user contacts");
+
+        // Get signed user
+        String userName = principal.getName();
+        User user = this.userRepository.getUserByUserName(userName);
+        List<Contact> contacts = this.contactRepository.findContactsByUser(user.getId());
+
+        model.addAttribute("contacts",contacts);
+
+        return "normal/show_contacts";
 
     }
 }

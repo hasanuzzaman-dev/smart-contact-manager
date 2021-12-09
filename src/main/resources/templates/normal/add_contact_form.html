@@ -22,10 +22,12 @@
                 <span class="input-group-text">
                   <i class="fa fa-plus"></i>
                 </span>
+                <!--name-->
                 <input type="text"
                        class="form-control"
                        placeholder="Enter name here"
                        name="name"
+                       required="required"
                        th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
                        th:value="${contact.name}"
                        aria-describedby="basic-addon1">
@@ -72,6 +74,7 @@
                        placeholder="Enter phone number here"
                        name="phone"
                        id="phone"
+                       required="required"
                        th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
                        th:value="${contact.phone}"
                        aria-describedby="basic-addon1">
@@ -92,6 +95,7 @@
                        class="form-control"
                        placeholder="Enter email here"
                        name="email"
+                       required="required"
                        th:classappend="${#fields.hasErrors('email') ? 'is-invalid': ''}"
                        th:value="${contact.email}"
                        aria-describedby="basic-addon1">
@@ -119,6 +123,7 @@
                          class="form-control"
                          id="inputGroupFile04"
                          name="imageUrl"
+                         required="required"
                          th:classappend="${#fields.hasErrors('imageUrl') ? 'is-invalid': ''}"
                          th:value="${contact.imageUrl}"
                          aria-describedby="inputGroupFileAddon04"

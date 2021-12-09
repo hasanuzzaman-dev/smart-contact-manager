@@ -126,14 +126,8 @@
                        id="inputGroupFile04"
                        name="imageUrl"
                        required="required"
-                       th:classappend="${#fields.hasErrors('imageUrl') ? 'is-invalid': ''}"
-                       th:value="${contact.imageUrl}"
                        aria-describedby="inputGroupFileAddon04"
                        aria-label="Upload">
-                <div class="invalid-feedback"
-                     th:each="e:${#fields.errors('imageUrl')}"
-                     th:text="${e}">
-                </div>
               </div>
               <!--Save Button-->
               <div class="container text-center">

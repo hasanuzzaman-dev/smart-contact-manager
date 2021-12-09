@@ -56,7 +56,7 @@ public class UserController {
     public String processContact(@Valid @ModelAttribute Contact contact,
                                  BindingResult bindingResult, Model model,
                                  Principal principal, HttpSession session,
-                                 @RequestParam("imageUrl") MultipartFile multipartFile) {
+                                 @RequestParam("processImage") MultipartFile multipartFile) {
 
         try {
             if (bindingResult.hasErrors()) {

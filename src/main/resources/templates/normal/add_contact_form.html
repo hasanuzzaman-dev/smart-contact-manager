@@ -123,6 +123,7 @@
                          th:value="${contact.imageUrl}"
                          aria-describedby="inputGroupFileAddon04"
                          aria-label="Upload">
+                  <!--This part cause may error for image uploading-->
                   <div class="invalid-feedback"
                        th:each="e:${#fields.errors('imageUrl')}"
                        th:text="${e}">

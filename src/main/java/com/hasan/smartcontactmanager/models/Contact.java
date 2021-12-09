@@ -22,7 +22,7 @@ public class Contact {
     @NotBlank(message = "Email can't be empty!")
     @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message = "Invalid email !!")
     private String email;
-    @NotBlank(message = "Please select an image!")
+    //@NotBlank(message = "Please select an image!")
     private String imageUrl;
     @Column(length = 50000)
     private String description;

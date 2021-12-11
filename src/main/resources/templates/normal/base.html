@@ -56,21 +56,9 @@
 </nav>
 <!--Navbar End-->
 
-
 <!--Sidebar-->
 <div class="sidebar mt-2">
     <span onclick="toggleSidebar()" class="crossBtn">&times;</span>
-
-    <!--Alert Message -->
-    <div class="container">
-        <div class="alert text-center"
-             th:if="${session.message}"
-             th:classappend="${session.message.type}"
-             role="alert">
-            <span th:text="${session.message.content}"></span>
-            <th:block th:text="${#session.removeAttribute('message')}"/>
-        </div>
-    </div>
 
     <a href="#" th:href="@{/user/index}" class="item"><i class="fas fa-home"></i> Home</a>
     <a href="#" th:href="@{/user/show-contacts}" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
@@ -86,7 +74,22 @@
 
 <!--Start Content-->
 <div class="content mt-5">
+
     <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+
+    <!--Start Alert Message -->
+    <div class="container">
+        <div class="alert text-center"
+             th:if="${session.message}"
+             th:classappend="${session.message.type}"
+             role="alert">
+            <span th:text="${session.message.content}"></span>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
+    </div>
+
+    <!--END Alert Message -->
+
     <div th:replace="${content}"></div>
 </div>
 <!--End of content area -->

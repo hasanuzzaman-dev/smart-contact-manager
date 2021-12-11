@@ -7,6 +7,9 @@ import com.hasan.smartcontactmanager.repositories.ContactRepository;
 import com.hasan.smartcontactmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -123,17 +126,21 @@ public class UserController {
     }
 
     // Show Contact handler
-    @GetMapping("/show-contacts")
-    public String showContacts(Model model,Principal principal){
+    // For pagination you need per page contact [n=5] and current page = [page = 0]
+    @GetMapping("/show-contacts/{page}")
+    public String showContacts(@PathVariable("page") Integer page, Model model,Principal principal){
 
         model.addAttribute("title", "Show user contacts");
 
         // Get signed user
         String userName = principal.getName();
         User user = this.userRepository.getUserByUserName(userName);
-        List<Contact> contacts = this.contactRepository.findContactsByUser(user.getId());
+        Pageable pageable = PageRequest.of(page,5);
+        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
 
         model.addAttribute("contacts",contacts);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("totalPage",contacts.getTotalPages());
 
         return "normal/show_contacts";
 

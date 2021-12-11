@@ -135,7 +135,7 @@ public class UserController {
         // Get signed user
         String userName = principal.getName();
         User user = this.userRepository.getUserByUserName(userName);
-        Pageable pageable = PageRequest.of(page,5);
+        Pageable pageable = PageRequest.of(page,2);
         Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
 
         model.addAttribute("contacts",contacts);

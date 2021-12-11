@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<section>
+    <div class="card ml-3 ms-3">
+        <div class="card-body">
+            <h1 class="text-center">Your Contacts</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${contacts}">
+                    <th scope="row" th:text="${'SCM-'+c.cId}">1</th>
+                    <td th:text="${c.name}">Mark</td>
+                    <td th:text="${c.email}">Otto</td>
+                    <td th:text="${c.phone}">@mdo</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <button class="btn btn-primary btn-sm">Update</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

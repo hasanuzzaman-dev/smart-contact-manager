@@ -35,7 +35,7 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/user/index}">Home</a>
                 </li>
 
                 <li class="nav-item">
@@ -56,24 +56,12 @@
 </nav>
 <!--Navbar End-->
 
-
 <!--Sidebar-->
 <div class="sidebar mt-2">
     <span onclick="toggleSidebar()" class="crossBtn">&times;</span>
 
-    <!--Alert Message -->
-    <div class="container">
-        <div class="alert text-center"
-             th:if="${session.message}"
-             th:classappend="${session.message.type}"
-             role="alert">
-            <span th:text="${session.message.content}"></span>
-            <th:block th:text="${#session.removeAttribute('message')}"/>
-        </div>
-    </div>
-
     <a href="#" th:href="@{/user/index}" class="item"><i class="fas fa-home"></i> Home</a>
-    <a href="#" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
+    <a href="#" th:href="@{/user/show-contacts}" class="item"><i class="fas fa-id-card-alt"></i> View Contacts</a>
     <a href="#" th:href="@{/user/add-contact}" class="item"><i class="fas fa-pencil-alt"></i> Add Contact</a>
     <a href="#" class="item"><i class="fas fa-user-circle"></i> Your Profile</a>
     <a href="#" class="item"><i class="fas fa-cog"></i> Settings</a>
@@ -86,7 +74,22 @@
 
 <!--Start Content-->
 <div class="content mt-5">
+
     <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+
+    <!--Start Alert Message -->
+    <div class="container">
+        <div class="alert text-center"
+             th:if="${session.message}"
+             th:classappend="${session.message.type}"
+             role="alert">
+            <span th:text="${session.message.content}"></span>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
+    </div>
+
+    <!--END Alert Message -->
+
     <div th:replace="${content}"></div>
 </div>
 <!--End of content area -->

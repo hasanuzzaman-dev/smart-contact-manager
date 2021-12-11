@@ -50,7 +50,7 @@ public class SignUpController {
             System.out.println("AGREEMENT: " + agreement);
 
             User savedUser = this.userRepository.save(user);
-            model.addAttribute("user", savedUser);
+            model.addAttribute("user", new User());
 
             session.setAttribute("message",new MyMessage("Successfully Registered!! ", "alert-success"));
 

@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -144,5 +145,20 @@ public class UserController {
 
         return "normal/show_contacts";
 
+    }
+
+    // Showing particular contact details
+    @RequestMapping("/{cid}/contact")
+    public String showContactDetails(@PathVariable("cid") Integer cid, Model model){
+        System.out.println("Cid:"+cid);
+        model.addAttribute("title", "Contact");
+
+        Optional<Contact> contactOptional = this.contactRepository.findById(cid);
+        Contact contact = contactOptional.get();
+
+        model.addAttribute("contact",contact);
+
+
+        return "normal/contact_details";
     }
 }

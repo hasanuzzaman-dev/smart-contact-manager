@@ -46,8 +46,6 @@ body{
         margin-left: 0 !important;
 
     }
-
-
 }
 /*Sidebar style*/
 .sidebar{
@@ -83,6 +81,8 @@ body{
     background: darkgray;
     margin-top: 10px;
 }
+/* Sidebar End */
+
 /*Content style*/
 .content{
     margin-left: 20%;

@@ -149,15 +149,25 @@ public class UserController {
 
     // Showing particular contact details
     @RequestMapping("/{cid}/contact")
-    public String showContactDetails(@PathVariable("cid") Integer cid, Model model){
-        System.out.println("Cid:"+cid);
+    public String showContactDetails(@PathVariable("cid") Integer cid, Model model,Principal principal){
+       // System.out.println("Cid:"+cid);
         model.addAttribute("title", "Contact");
 
         Optional<Contact> contactOptional = this.contactRepository.findById(cid);
-        Contact contact = contactOptional.get();
 
-        model.addAttribute("contact",contact);
 
+        if (contactOptional.isPresent()){
+            Contact contact = contactOptional.get();
+
+            // get current user
+            String username = principal.getName();
+            User user = this.userRepository.getUserByUserName(username);
+
+            // show contact only current user
+            if (user.getId() == contact.getUser().getId()){
+                model.addAttribute("contact",contact);
+            }
+        }
 
         return "normal/contact_details";
     }

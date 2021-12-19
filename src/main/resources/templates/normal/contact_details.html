@@ -10,7 +10,7 @@
 <body>
 <section>
     <div class="card ms-3 me-3">
-        <div class="card-body">
+        <div class="card-body" th:if="${contact}">
             <div class="container text-center">
                 <img src=""
                      style="height: 200px; width: 200px;"
@@ -49,6 +49,7 @@
                 </div>
             </div>
         </div>
+        <h1 class="text-center" th:unless="${contact}">You don't have permission to see this contact...</h1>
     </div>
 </section>
 </body>

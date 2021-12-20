@@ -62,10 +62,8 @@ public class UserController {
 
     //Processing add contact form
     @PostMapping("/process-contact")
-    public String processContact(@Valid @ModelAttribute Contact contact,
-                                 BindingResult bindingResult, Model model,
-                                 Principal principal, HttpSession session,
-                                 @RequestParam("processImage") MultipartFile multipartFile) {
+    public String processContact(@Valid @ModelAttribute Contact contact, @RequestParam("processImage") MultipartFile multipartFile, BindingResult bindingResult,
+                                 Model model, Principal principal, HttpSession session) {
 
         try {
             if (bindingResult.hasErrors()) {
@@ -196,11 +194,34 @@ public class UserController {
 
     // Open update from handler
     @PostMapping("/update-contact/{cid}")
-    public String updateForm(@PathVariable("cid") Integer cid, Model model){
+    public String openUpdateForm(@PathVariable("cid") Integer cid, Model model){
 
         model.addAttribute("title", "Update Contact");
         Contact contact = this.contactRepository.findById(cid).get();
         model.addAttribute("contact",contact);
         return "normal/update_form";
+    }
+
+    // update Contact handler
+    @RequestMapping(value ="/process-update", method = RequestMethod.POST)
+    public String updateForm(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile multipartFile,
+                             Model model,Principal principal, HttpSession session){
+        System.out.println("Contact: "+contact.getName()+"Image: "+contact.getImageUrl());
+        try {
+            if (!multipartFile.isEmpty()){
+                // file rewrite
+            }else {
+                System.out.println(contact.getImageUrl());
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        User user = this.userRepository.getUserByUserName(principal.getName());
+        contact.setUser(user);
+        this.contactRepository.save(contact);
+
+        return "";
     }
 }

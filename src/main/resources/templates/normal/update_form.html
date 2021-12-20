@@ -17,8 +17,10 @@
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <form action="#" th:object="${contact}" enctype="multipart/form-data" method="post"
-                              th:action="@{/user/process-contact}" class="mt-2">
+                              th:action="@{/user/process-update}" class="mt-2">
 
+                            <!--Hidden ID-->
+                            <input type="hidden" th:value="${contact.cId}" name="cId">
                             <!--First name-->
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fa fa-plus"></i></span>
@@ -37,8 +39,8 @@
                             </div>
                             <!--Second name-->
 
-                            <div class="input-group mb-3"><span class="input-group-text">
-                                <i class="fas fa-user-alt"></i></span>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
                                 <input type="text"
                                        class="form-control"
                                        placeholder="Enter lastname here"
@@ -60,8 +62,8 @@
                             </div>
 
                             <!--Phone-->
-                            <div class="input-group mb-3"><span class="input-group-text">
-                                <i class="fas fa-mobile-alt"></i></span>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                 <input type="number"
                                        class="form-control"
                                        placeholder="Enter phone number here"
@@ -81,8 +83,8 @@
 
 
                             <!--Email-->
-                            <div class="input-group mb-3"><span class="input-group-text">
-                                <i class="fa fa-envelope"></i></span>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                 <input type="text"
                                        id="email"
                                        class="form-control"
@@ -103,6 +105,7 @@
                                 <textarea id="mytextarea" class="form-control" placeholder="Enter description here" name="description" rows="10" th:text="${contact.description}"></textarea>
                             </div>
 
+                            <!--Show Image-->
                             <div class="container text-center">
                                 <img style="width: 250px;height: 250px" src="" class="my-profile-picture" alt="" th:src="@{'/img/contactImage/'+${contact.imageUrl}}">
                             </div>
@@ -114,8 +117,7 @@
                                 <input type="file"
                                        class="form-control"
                                        id="inputGroupFile04"
-                                       name="processImage"
-                                       required="required"
+                                       name="profileImage"
                                        aria-describedby="inputGroupFileAddon04"
                                        aria-label="Upload">
 

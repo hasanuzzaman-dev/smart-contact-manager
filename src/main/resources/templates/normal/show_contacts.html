@@ -40,16 +40,18 @@
                     </td>
                     <td th:text="${c.phone}">@mdo</td>
                     <td>
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                       <!-- <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a> -->
+                        <a th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>
                         <button class="btn btn-primary btn-sm">Update</button>
                        <!-- <button class="btn btn-info btn-sm">Update</button>-->
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <!--<h1 th:text="${(#lists.size(contacts))}">You don't have any Contact!!</h1>-->
+
 
             <!--Pagination start-->
-
             <div class="container text-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
@@ -72,5 +74,7 @@
     </div>
 
 </section>
+
+
 </body>
 </html>

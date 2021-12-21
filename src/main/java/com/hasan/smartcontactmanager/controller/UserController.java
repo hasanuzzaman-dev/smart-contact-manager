@@ -254,6 +254,7 @@ public class UserController {
 
         session.setAttribute("message",new MyMessage("Your contact is updated...","alert-success"));
 
+        // redirect uses for URL not html file
         return "redirect:/user/"+contact.getcId()+"/contact";
     }
 }

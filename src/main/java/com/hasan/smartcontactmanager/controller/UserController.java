@@ -6,12 +6,14 @@ import com.hasan.smartcontactmanager.models.User;
 import com.hasan.smartcontactmanager.repositories.ContactRepository;
 import com.hasan.smartcontactmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +40,14 @@ public class UserController {
 
     @Autowired
     private ContactRepository contactRepository;
+
+    @Value("${app.image.cdn}")
+    private String imageCDN;
+
+    @Value("${app.upload.path}")
+    private String uploadPath;
+
+    private Path rootLocation;
 
     // This method run for every method index, add_contact or etc.
     // Method for adding common data for response.
@@ -206,12 +218,30 @@ public class UserController {
     @RequestMapping(value ="/process-update", method = RequestMethod.POST)
     public String updateForm(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile multipartFile,
                              Model model,Principal principal, HttpSession session){
-        System.out.println("Contact: "+contact.getName()+"Image: "+contact.getImageUrl());
         try {
+            // Fetch old contact
+            Contact oldContact = this.contactRepository.findById((contact.getcId())).get();
             if (!multipartFile.isEmpty()){
                 // file rewrite
+                // At first delete old photo and update photo
+                // delete photo
+                File deleteFile = new ClassPathResource("static/img/contactImage").getFile();
+                File oldFile = new File(deleteFile,oldContact.getImageUrl());
+                boolean isDelete = oldFile.delete();
+
+                // Update photo
+                File saveFile = new ClassPathResource("static/img/contactImage").getFile();
+                // rename file with currentTimeMillis
+                String filename = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+                filename = System.currentTimeMillis() +filename.toLowerCase().replaceAll(" ", "-");
+                Path rootLocation = Paths.get(saveFile + File.separator);
+
+                Files.copy(multipartFile.getInputStream(), rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+
+                contact.setImageUrl(filename);
+
             }else {
-                System.out.println(contact.getImageUrl());
+                contact.setImageUrl(oldContact.getImageUrl());
             }
 
         }catch (Exception e){
@@ -222,6 +252,8 @@ public class UserController {
         contact.setUser(user);
         this.contactRepository.save(contact);
 
-        return "";
+        session.setAttribute("message",new MyMessage("Your contact is updated...","alert-success"));
+
+        return "redirect:/user/"+contact.getcId()+"/contact";
     }
 }

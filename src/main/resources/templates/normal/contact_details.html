@@ -43,9 +43,12 @@
                 <div class="description">
                     <th:block th:utext = "${contact.description}"/>
                 </div>
-                <div class="container">
-                    <button class="btn btn-primary btn-sm">Update</button>
-                    <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm">Delete</button>
+                <div class="container d-grid gap-2 col-6 mx-auto">
+                    <form th:action="@{'/user/update-contact/'+${contact.cId}}" method="post" class="d-grid">
+                        <button type="submit" class="btn btn-block btn-primary btn-sm">Update</button>
+                    </form>
+                    <button th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm btn-block">Delete</button>
+
                 </div>
             </div>
         </div>

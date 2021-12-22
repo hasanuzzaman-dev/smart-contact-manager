@@ -139,19 +139,19 @@ public class UserController {
     // Show Contact handler
     // For pagination you need per page contact [n=5] and current page = [page = 0]
     @GetMapping("/show-contacts/{page}")
-    public String showContacts(@PathVariable("page") Integer page, Model model,Principal principal){
+    public String showContacts(@PathVariable("page") Integer page, Model model, Principal principal) {
 
         model.addAttribute("title", "Show user contacts");
 
         // Get signed user
         String userName = principal.getName();
         User user = this.userRepository.getUserByUserName(userName);
-        Pageable pageable = PageRequest.of(page,2);
-        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
+        Pageable pageable = PageRequest.of(page, 2);
+        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(), pageable);
 
-        model.addAttribute("contacts",contacts);
-        model.addAttribute("currentPage",page);
-        model.addAttribute("totalPage",contacts.getTotalPages());
+        model.addAttribute("contacts", contacts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPage", contacts.getTotalPages());
 
         return "normal/show_contacts";
 
@@ -159,14 +159,14 @@ public class UserController {
 
     // Showing particular contact details
     @RequestMapping("/{cid}/contact")
-    public String showContactDetails(@PathVariable("cid") Integer cid, Model model,Principal principal){
-       // System.out.println("Cid:"+cid);
+    public String showContactDetails(@PathVariable("cid") Integer cid, Model model, Principal principal) {
+        // System.out.println("Cid:"+cid);
         model.addAttribute("title", "Contact");
 
         Optional<Contact> contactOptional = this.contactRepository.findById(cid);
 
 
-        if (contactOptional.isPresent()){
+        if (contactOptional.isPresent()) {
             Contact contact = contactOptional.get();
 
             // get current user
@@ -174,8 +174,8 @@ public class UserController {
             User user = this.userRepository.getUserByUserName(username);
 
             // show contact only current user
-            if (user.getId() == contact.getUser().getId()){
-                model.addAttribute("contact",contact);
+            if (user.getId() == contact.getUser().getId()) {
+                model.addAttribute("contact", contact);
             }
         }
 
@@ -184,9 +184,9 @@ public class UserController {
 
     // delete contact handler
     @GetMapping("/delete/{cid}")
-    public String deleteContact(@PathVariable("cid") Integer cid, Model model,Principal principal, HttpSession session){
+    public String deleteContact(@PathVariable("cid") Integer cid, Model model, Principal principal, HttpSession session) {
         Optional<Contact> contactOptional = this.contactRepository.findById(cid);
-        if (contactOptional.isPresent()){
+        if (contactOptional.isPresent()) {
             Contact contact = contactOptional.get();
 
             // get current user
@@ -194,10 +194,10 @@ public class UserController {
             User user = this.userRepository.getUserByUserName(username);
 
             // delete contact only current user
-            if (user.getId() == contact.getUser().getId()){
+            if (user.getId() == contact.getUser().getId()) {
                 this.contactRepository.delete(contact);
 
-                session.setAttribute("message",new MyMessage("Contact deleted Successfully","alert-success"));
+                session.setAttribute("message", new MyMessage("Contact deleted Successfully", "alert-success"));
             }
 
         }
@@ -206,45 +206,45 @@ public class UserController {
 
     // Open update from handler
     @PostMapping("/update-contact/{cid}")
-    public String openUpdateForm(@PathVariable("cid") Integer cid, Model model){
+    public String openUpdateForm(@PathVariable("cid") Integer cid, Model model) {
 
         model.addAttribute("title", "Update Contact");
         Contact contact = this.contactRepository.findById(cid).get();
-        model.addAttribute("contact",contact);
+        model.addAttribute("contact", contact);
         return "normal/update_form";
     }
 
     // update Contact handler
-    @RequestMapping(value ="/process-update", method = RequestMethod.POST)
-    public String updateForm(@ModelAttribute Contact contact,@RequestParam("profileImage") MultipartFile multipartFile,
-                             Model model,Principal principal, HttpSession session){
+    @RequestMapping(value = "/process-update", method = RequestMethod.POST)
+    public String updateForm(@ModelAttribute Contact contact, @RequestParam("profileImage") MultipartFile multipartFile,
+                             Model model, Principal principal, HttpSession session) {
         try {
             // Fetch old contact
             Contact oldContact = this.contactRepository.findById((contact.getcId())).get();
-            if (!multipartFile.isEmpty()){
+            if (!multipartFile.isEmpty()) {
                 // file rewrite
                 // At first delete old photo and update photo
                 // delete photo
                 File deleteFile = new ClassPathResource("static/img/contactImage").getFile();
-                File oldFile = new File(deleteFile,oldContact.getImageUrl());
+                File oldFile = new File(deleteFile, oldContact.getImageUrl());
                 boolean isDelete = oldFile.delete();
 
                 // Update photo
                 File saveFile = new ClassPathResource("static/img/contactImage").getFile();
                 // rename file with currentTimeMillis
                 String filename = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-                filename = System.currentTimeMillis() +filename.toLowerCase().replaceAll(" ", "-");
+                filename = System.currentTimeMillis() + filename.toLowerCase().replaceAll(" ", "-");
                 Path rootLocation = Paths.get(saveFile + File.separator);
 
                 Files.copy(multipartFile.getInputStream(), rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
 
                 contact.setImageUrl(filename);
 
-            }else {
+            } else {
                 contact.setImageUrl(oldContact.getImageUrl());
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -252,9 +252,18 @@ public class UserController {
         contact.setUser(user);
         this.contactRepository.save(contact);
 
-        session.setAttribute("message",new MyMessage("Your contact is updated...","alert-success"));
+        session.setAttribute("message", new MyMessage("Your contact is updated...", "alert-success"));
 
         // redirect uses for URL not html file
-        return "redirect:/user/"+contact.getcId()+"/contact";
+        return "redirect:/user/" + contact.getcId() + "/contact";
+    }
+
+    // Profile handler
+    @GetMapping("/profile")
+    public String yourProfile(Model model){
+
+        model.addAttribute("title", "Profile");
+
+        return "normal/profile";
     }
 }

@@ -42,15 +42,15 @@
                     <td>
                        <!-- <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a> -->
                         <a th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>
-                        <button class="btn btn-primary btn-sm">Update</button>
+                        <!--Post request handler-->
+                        <form th:action="@{'/user/update-contact/'+${c.cId}}" method="post" class="mt-2">
+                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                        </form>
                        <!-- <button class="btn btn-info btn-sm">Update</button>-->
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <!--<h1 th:text="${(#lists.size(contacts))}">You don't have any Contact!!</h1>-->
-
-
             <!--Pagination start-->
             <div class="container text-center">
                 <nav aria-label="Page navigation example">
@@ -69,8 +69,9 @@
                     </ul>
                 </nav>
             </div>
-
+            <!--<h1 th:text="${(#lists.size(contacts))}">You don't have any Contact!!</h1>-->
         </div>
+
     </div>
 
 </section>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<section>
+
+    <div class="card me-3 ms-3">
+        <div class="card-body">
+            <h1 class="text-center">Update Your Contact</h1>
+            <div class="container-fluid mt-1">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <form action="#" th:object="${contact}" enctype="multipart/form-data" method="post"
+                              th:action="@{/user/process-update}" class="mt-2">
+
+                            <!--Hidden ID-->
+                            <input type="hidden" th:value="${contact.cId}" name="cId">
+                            <!--First name-->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fa fa-plus"></i></span>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Enter name here"
+                                       name="name"
+                                       required="required"
+                                       th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+                                       th:value="${contact.name}"
+                                       aria-describedby="basic-addon1">
+                                <div class="invalid-feedback"
+                                     th:each="e:${#fields.errors('name')}"
+                                     th:text="${e}">
+                                </div>
+                            </div>
+                            <!--Second name-->
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Enter lastname here"
+                                       name="secondName"
+                                       th:value="${contact.secondName}"
+                                       aria-describedby="basic-addon1">
+                            </div>
+
+                            <!--Work-->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Enter work here"
+                                       name="work"
+                                       id="work"
+                                       th:value="${contact.work}"
+                                       aria-describedby="basic-addon1">
+                            </div>
+
+                            <!--Phone-->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                                <input type="number"
+                                       class="form-control"
+                                       placeholder="Enter phone number here"
+                                       name="phone"
+                                       id="phone"
+                                       required="required"
+                                       minlength="11"
+                                       maxlength="11"
+                                       th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}"
+                                       th:value="${contact.phone}"
+                                       aria-describedby="basic-addon1">
+                                <div class="invalid-feedback"
+                                     th:each="e:${#fields.errors('phone')}"
+                                     th:text="${e}">
+                                </div>
+                            </div>
+
+
+                            <!--Email-->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                <input type="text"
+                                       id="email"
+                                       class="form-control"
+                                       placeholder="Enter email here"
+                                       name="email"
+                                       required="required"
+                                       th:classappend="${#fields.hasErrors('email') ? 'is-invalid': ''}"
+                                       th:value="${contact.email}"
+                                       aria-describedby="basic-addon1">
+                                <div class="invalid-feedback"
+                                     th:each="e:${#fields.errors('email')}"
+                                     th:text="${e}">
+                                </div>
+                            </div>
+
+                            <!--Description-->
+                            <div class="input-group mb-3">
+                                <textarea id="mytextarea" class="form-control" placeholder="Enter description here" name="description" rows="10" th:text="${contact.description}"></textarea>
+                            </div>
+
+                            <!--Show Image-->
+                            <div class="container text-center">
+                                <img style="width: 250px;height: 250px" src="" class="my-profile-picture" alt="" th:src="@{'/img/contactImage/'+${contact.imageUrl}}">
+                            </div>
+
+                            <p class="text-secondary">Choose new profile picture</p>
+
+                            <!--Contact Img-->
+                            <div class="input-group mt-3 mb-3">
+                                <input type="file"
+                                       class="form-control"
+                                       id="inputGroupFile04"
+                                       name="profileImage"
+                                       aria-describedby="inputGroupFileAddon04"
+                                       aria-label="Upload">
+
+                            </div>
+                            <!--Update Button-->
+                            <div class="container text-center">
+                                <button class="btn btn-outline-primary">Update Contact</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+
+</section>
+</body>
+</html>

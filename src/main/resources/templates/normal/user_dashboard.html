@@ -9,10 +9,24 @@
 </head>
 <body>
 <section>
-    <h1>This is USER DASHBOARD</h1>
-    <h1>Username: <span th:text="${user.name}"></span> </h1>
-    <h1>Email: <span th:text="${user.email}"></span> </h1>
-    <h1><a th:href="@{/logout}">Logout</a> </h1>
+   <div class="container">
+       <div class="card">
+           <div class="card-body">
+               <div class="container text-center">
+                   <img src="" style="height: 200px;width: 200px;"
+                        class="my-profile-picture"
+                        th:src="@{/img/contact_logo.png}"
+                        alt="smart_contact_manager.png"
+                   >
+               </div>
+               <h1 class="text-center mt-3 text-secondary fst-italic">
+                   Start adding your contact on cloud....
+               </h1>
+               <a th:href="@{/user/add-contact}" class="btn btn-primary mt-4 text-uppercase d-grid">Add new Contact</a>
+           </div>
+       </div>
+
+   </div>
 </section>
 </body>
 </html>

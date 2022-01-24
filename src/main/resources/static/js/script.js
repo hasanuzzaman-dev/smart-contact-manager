@@ -25,7 +25,7 @@ const search = () => {
         // search
         console.log(query);
         // sending request to the server
-        let url = `http://localhost:8282/search/${query}`;
+        let url = window.location.protocol + "//" + window.location.host +`/search/${query}`;
         // modern js used promise no need to use ajax
         fetch(url).then((response) =>{
             return response.json();

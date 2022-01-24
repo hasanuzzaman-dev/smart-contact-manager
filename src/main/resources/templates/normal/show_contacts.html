@@ -15,7 +15,8 @@
 
             <!--Search-->
             <div class="search-container my-4">
-                <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contact">
+                <input onkeyup="search()" id="search-input" type="text" class="form-control"
+                       placeholder="Search your contact">
                 <!--Search result goes here-->
                 <div class="search-result">
 
@@ -79,7 +80,9 @@
                                href="#"><span th:text="${i}"></span></a>
                         </li>
                         <li th:classappend="${currentPage +1 == totalPage ? 'disabled':''}" class="page-item">
-                            <a class="page-link" th:href="@{'/user/show-contacts/'+ ${currentPage +1}}"  href="#">Next</a></li>
+                            <a class="page-link" th:href="@{'/user/show-contacts/'+ ${currentPage +1}}"
+                               href="#">Next</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -87,6 +90,13 @@
         </div>
 
     </div>
+
+    <script>
+        $(document).ready(() => {
+            $(".item").removeClass("active");
+            $("#show-contacts-link").addClass("active");
+        })
+    </script>
 
 </section>
 

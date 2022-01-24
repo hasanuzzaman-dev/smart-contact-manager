@@ -109,3 +109,8 @@ body{
     display: none;
 }
 
+.active{
+    background: #8e24aa !important;
+    color: white !important;
+}
+

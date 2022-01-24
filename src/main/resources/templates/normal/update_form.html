@@ -102,12 +102,14 @@
 
                             <!--Description-->
                             <div class="input-group mb-3">
-                                <textarea id="mytextarea" class="form-control" placeholder="Enter description here" name="description" rows="10" th:text="${contact.description}"></textarea>
+                                <textarea id="mytextarea" class="form-control" placeholder="Enter description here"
+                                          name="description" rows="10" th:text="${contact.description}"></textarea>
                             </div>
 
                             <!--Show Image-->
                             <div class="container text-center">
-                                <img style="width: 250px;height: 250px" src="" class="my-profile-picture" alt="" th:src="@{'/img/contactImage/'+${contact.imageUrl}}">
+                                <img style="width: 250px;height: 250px" src="" class="my-profile-picture" alt=""
+                                     th:src="@{'/img/contactImage/'+${contact.imageUrl}}">
                             </div>
 
                             <p class="text-secondary">Choose new profile picture</p>

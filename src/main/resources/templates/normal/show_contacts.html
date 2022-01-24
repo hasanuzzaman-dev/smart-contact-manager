@@ -23,44 +23,48 @@
                 </div>
             </div>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="c : ${contacts}">
-                    <th scope="row" th:text="${'SCM-'+c.cId}">1</th>
+            <div class="div table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="c : ${contacts}">
+                        <th scope="row" th:text="${'SCM-'+c.cId}">1</th>
 
-                    <td>
-                        <img class="my-profile-picture" th:src="@{'/img/contactImage/'+${c.imageUrl}}"/>
-                        <span th:text="${' '+c.name}"></span>
-                    </td>
+                        <td>
+                            <img class="my-profile-picture" th:src="@{'/img/contactImage/'+${c.imageUrl}}"/>
+                            <span th:text="${' '+c.name}"></span>
+                        </td>
 
-                    <td>
-                        <a th:href="@{'/user/'+${c.cId}+'/contact'}">
-                            <span th:text="${c.email}"></span>
-                        </a>
+                        <td>
+                            <a th:href="@{'/user/'+${c.cId}+'/contact'}">
+                                <span th:text="${c.email}"></span>
+                            </a>
 
-                    </td>
-                    <td th:text="${c.phone}">@mdo</td>
-                    <td>
-                       <!-- <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a> -->
-                        <a th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>
-                        <!--Post request handler-->
-                        <form th:action="@{'/user/update-contact/'+${c.cId}}" method="post" class="mt-2">
-                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                        </form>
-                       <!-- <button class="btn btn-info btn-sm">Update</button>-->
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                        <td th:text="${c.phone}">@mdo</td>
+                        <td>
+                            <!-- <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a> -->
+                            <a th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm">Delete</a>
+                            <!--Post request handler-->
+                            <form th:action="@{'/user/update-contact/'+${c.cId}}" method="post" class="mt-2">
+                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                            </form>
+                            <!-- <button class="btn btn-info btn-sm">Update</button>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
             <!--Pagination start-->
             <div class="container text-center">
                 <nav aria-label="Page navigation example">

@@ -268,4 +268,9 @@ public class UserController {
     }
 
 
+    // open setting handler
+    @GetMapping("/settings")
+    public String openSetting(Model model){
+        return "normal/settings";
+    }
 }

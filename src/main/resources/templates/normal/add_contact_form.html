@@ -126,6 +126,18 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+
+        $(document).ready(() => {
+            $(".item").removeClass("active");
+            $("#add-contact-link").addClass("active");
+        })
+
+    </script>
 
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>

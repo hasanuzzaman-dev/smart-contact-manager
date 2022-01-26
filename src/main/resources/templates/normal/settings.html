@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Change Password</h3>
+                        <form th:action="@{/user/change-password}" method="post">
+                            <div class="mb-3">
+                                <input name="oldPassword" type="password" placeholder="Enter old password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <input name="newPassword" type="password" placeholder="Enter new password" class="form-control">
+                            </div>
+                            <div class="container text-center">
+                                <button type="submit" class="btn btn-primary">Change</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(() => {
+            $(".item").removeClass("active");
+            $("#setting-link").addClass("active");
+        })
+    </script>
+</section>
+</body>
+</html>
